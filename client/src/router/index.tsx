@@ -13,6 +13,7 @@ import Settings from "../features/settings/pages/Settings";
 
 
 export const router = createHashRouter([
+  // update
   {
     path: "/",
     element: <RootLayout />,
