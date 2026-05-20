@@ -11,7 +11,7 @@ import Login from "../features/auth/pages/Login";
 import Signup from "../features/auth/pages/Signup";
 import Settings from "../features/settings/pages/Settings";
 
-export const router = createBrowserRouter([
+export const router = createBHashRouter([
   {
     path: "/",
     element: <RootLayout />,
