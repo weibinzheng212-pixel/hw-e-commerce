@@ -36,7 +36,7 @@ const ProductDetail = () => {
             </Badge>
           </Group>
           <Text size="lg" mb="md">
-            Product description goes here
+            Product description goes here 1
           </Text>
           <Text size="md" mb="xl" c="dimmed">
             Stock: 10 units available

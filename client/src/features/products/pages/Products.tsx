@@ -12,63 +12,14 @@ import {
 } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import { Spinner } from "../../../components/ui/Spinner";
+import type { ProductResponse } from "../type";
+import { fetchCategories, fetchProducts } from "../api";
 
-export interface Dimensions {
-  width: number;
-  height: number;
-  depth: number;
-}
-
-export interface Review {
-  rating: number;
-  comment: string;
-  date: string;
-  reviewerName: string;
-  reviewerEmail: string;
-}
-
-export interface Meta {
-  createdAt: string;
-  updatedAt: string;
-  barcode: string;
-  qrCode: string;
-}
-export interface Products {
-  id: number;
-  title: string;
-  description: string;
-  category: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  tags: string[];
-  brand: string;
-  sku: string;
-  weight: number;
-  dimensions: Dimensions;
-  warrantyInformation: string;
-  shippingInformation: string;
-  availabilityStatus: string;
-  review: Review;
-  returnPolicy: string;
-  minimumOrderQuantity: number;
-  meta: Meta;
-  images: string[];
-  thumbnail: string;
-}
-
-export interface ProductResponse {
-  products: Products[];
-  total: number;
-  skip: number;
-  limit: number;
-}
-
-const fetchProducts = async () => {
-  const res = await fetch("https://dummyjson.com/products");
-  const data = await res.json();
-  return data as ProductResponse;
+const useCategory = () => {
+  return useQuery({
+    queryKey: ["category"],
+    queryFn: fetchCategories,
+  });
 };
 
 const Products = () => {
