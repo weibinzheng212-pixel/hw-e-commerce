@@ -14,6 +14,8 @@ import { useQuery } from "@tanstack/react-query";
 import { Spinner } from "../../../components/ui/Spinner";
 import type { ProductResponse } from "../type";
 import { fetchCategories, fetchProducts } from "../api";
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+
 
 const useCategory = () => {
   return useQuery({
