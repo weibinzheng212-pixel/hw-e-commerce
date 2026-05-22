@@ -28,7 +28,7 @@ export default function AuthProvider({childern}: {children: ReactNode}){
 
 //     return {
 //         <AuthContextType.Provider value = {{isloggedIn, user}}>
-// {children}
+//          {children}
 //         </AuthContextType.Provider>
 
 //     }

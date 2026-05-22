@@ -46,17 +46,17 @@ const Products = () => {
       <Text size="lg">Products page - add your products here test</Text>
       <Flex wrap="wrap" gap="md">
         {data?.products.map((products) => {
-          const { id, title, price, rating, stock, images, description } =
+          const { id, title, price, rating, stock, images, thumbnail, description } =
             products;
           return (
             <Card key={id} shadow="sm" padding="xl" withBorder w={250}>
               <Card.Section>
-                <Image src={images} height={160} alt={title} />
+                <Image src={thumbnail} height={160} alt={title} />
               </Card.Section>
 
               <Group justify="space-between" mt="md" mb="xs">
                 <Text fw={500}>{title}</Text>
-                <Badge color="pink">{price}</Badge>
+                <Badge color="pink">${price}</Badge>
               </Group>
 
               <Text size="sm" c="dimmed">
