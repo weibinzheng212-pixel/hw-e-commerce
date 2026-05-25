@@ -9,7 +9,10 @@ export const Footer = () => {
         borderTop: '1px solid #e9ecef',
         marginTop: 'auto',
       }}
+
+  
     >
+      <p>test</p>
       <Group justify="center">
         <Text size="sm" c="dimmed">
           © 2024 E-Commerce Store. All rights reserved.

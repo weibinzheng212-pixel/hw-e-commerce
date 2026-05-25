@@ -1,6 +1,6 @@
 import { Box, Title } from "@mantine/core";
 import { Hero } from "./Hero";
-// import { CategoryCards } from "./CategoryCard";
+import { CategoryCards } from "./CategoryCard";
 import { FeaturedProducts } from "./FeaturedProducts";
 
 const HomeInfoSection = () => {
@@ -12,7 +12,7 @@ const HomeInfoSection = () => {
       <Hero />
 
       {/* {Navigation} */}
-      {/* <CategoryCards /> */}
+      <CategoryCards />
 
       {/* 3. Dynamic Inventory Showcase */}
       <FeaturedProducts />
