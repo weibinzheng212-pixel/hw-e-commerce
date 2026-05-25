@@ -20,7 +20,7 @@ const ProductDetail = () => {
           <Image
             src="https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/thumbnail.webp"
             alt="Product"
-            height={400}
+            height={250}
           />
         </Grid.Col>
         <Grid.Col span={{ base: 12, md: 6 }}>

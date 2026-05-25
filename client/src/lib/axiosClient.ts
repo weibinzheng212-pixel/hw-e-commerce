@@ -3,7 +3,7 @@ import type { AxiosInstance, InternalAxiosRequestConfig } from "axios";
 
 const getToken = localStorage.getItem('token');
 
-const instance = axios.create({
+const api = axios.create({
   baseURL: "https://dummyjson.com/products",
   timeout: 5000,
   headers: { "X-Custom-Header": "foobar" },
@@ -24,4 +24,4 @@ api.interceptors.request.use(
   }
 );
 
-export default instance;
+export default api;

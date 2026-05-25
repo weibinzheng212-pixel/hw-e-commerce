@@ -35,6 +35,8 @@ export const router = createHashRouter([
         path: "settings",
         element: <Settings />,
       },
+      
+      
     ],
   },
 ]);

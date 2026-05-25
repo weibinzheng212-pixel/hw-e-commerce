@@ -1,36 +1,58 @@
-import { Children, createContext, useState, type ReactNode } from "react";
+import { createContext, useState, type ReactNode } from "react";
 
 export interface User {
     id: number;
     username: string;
+    password?: string; 
 }
 
-export interface AuthContextType{
+export interface AuthContextType {
     isLoggedIn: boolean;
     user: User | null;
-    login:(username: string, password: string) => Promise<void>
+    isLoading: boolean; 
+    login: (username: string, password: string) => Promise<void>;
     logout: () => void;
 }
 
+export const AuthContext = createContext<AuthContextType | null>(null);
 
- const AuthContext = createContext<AuthContextType | null>(null);
+export default function AuthProvider({ children }: { children: ReactNode }) {
+    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+    const [user, setUser] = useState<User | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(false); 
+
+    const login = async (username: string, password: string) => {
+        try {
+            setIsLoading(true);
+            const res = await fetch("https://dummyjson.com/auth/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password })
+            });
+            
+            if (res.ok) {
+                const data = await res.json();
+                setUser(data.user);
+                setIsLoggedIn(true);
+            } else {
+                console.error("Invalid credentials");
+            }
+        } catch (error) {
+            console.error("Login failed:", error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const logout = () => {
+        setUser(null);
+        setIsLoggedIn(false);
+    };
 
 
-export default function AuthProvider({childern}: {children: ReactNode}){
-    const[isloggedIn, seIsLoggedIn] = useState(false);
-    const [user, setUser] = useState<User | null>(null)
-    const [isLoading, setIsLoading] = useState(true)
-
-    const login = async () => {
-        const res = await fetch("")
-
-    }
-
-//     return {
-//         <AuthContextType.Provider value = {{isloggedIn, user}}>
-//          {children}
-//         </AuthContextType.Provider>
-
-//     }
-
+    return (
+        <AuthContext.Provider value={{ isLoggedIn, user, isLoading, login, logout }}>
+            {children}
+        </AuthContext.Provider>
+    );
 }
