@@ -8,6 +8,7 @@ export interface User {
 
 export interface AuthContextType {
     isLoggedIn: boolean;
+    isAuthenticated: boolean;
     user: User | null;
     isLoading: boolean; 
     login: (username: string, password: string) => Promise<void>;
@@ -20,6 +21,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     const [user, setUser] = useState<User | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false); 
+    const isAuthenticated = isLoggedIn && user !== null;
 
     const login = async (username: string, password: string) => {
         try {
@@ -52,7 +54,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, user, isLoading, login, logout }}>
+        <AuthContext.Provider value={{ isLoggedIn, isAuthenticated, user, isLoading, login, logout }}>
             {children}
         </AuthContext.Provider>
     );
@@ -60,7 +62,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
-  if (context === undefined) {
+  if (!context) {
     throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;

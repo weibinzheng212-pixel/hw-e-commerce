@@ -10,7 +10,7 @@ import Cart from "../features/cart/pages/Cart";
 import Login from "../features/auth/pages/Login";
 import Signup from "../features/auth/pages/Signup";
 import Settings from "../features/settings/pages/Settings";
-
+import { ProtectedRoute } from "../features/auth/pages/ProtectedRoute";
 
 export const router = createHashRouter([
   // update
@@ -27,16 +27,20 @@ export const router = createHashRouter([
       },
       { path: "login", element: <Login /> },
       { path: "signup", element: <Signup /> },
+
       {
-        path: "cart",
-        element: <Cart />,
+        element: <ProtectedRoute />, // Wrap protected routes with ProtectedRoute
+        children: [
+          {
+            path: "cart",
+            element: <Cart />,
+          },
+          {
+            path: "settings",
+            element: <Settings />,
+          },
+        ],
       },
-      {
-        path: "settings",
-        element: <Settings />,
-      },
-      
-      
     ],
   },
 ]);
