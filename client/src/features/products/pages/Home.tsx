@@ -22,6 +22,7 @@ const Home = () => {
         <Text size="lg" c="dimmed">
           Discover amazing products across all categories
         </Text>
+        
       </Box>
 
       <Recommendations />

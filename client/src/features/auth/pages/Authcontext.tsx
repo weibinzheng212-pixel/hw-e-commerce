@@ -1,4 +1,4 @@
-import { createContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useState, type ReactNode } from "react";
 
 export interface User {
     id: number;
@@ -24,6 +24,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     const login = async (username: string, password: string) => {
         try {
             setIsLoading(true);
+            setIsLoggedIn(false);
             const res = await fetch("https://dummyjson.com/auth/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -56,3 +57,11 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
         </AuthContext.Provider>
     );
 }
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
+};

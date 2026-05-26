@@ -1,27 +1,28 @@
-import axios from 'axios';
-import type { AxiosInstance, InternalAxiosRequestConfig } from "axios";
+import axios from "axios";
+import type { InternalAxiosRequestConfig } from "axios";
 
-const getToken = localStorage.getItem('token');
-
-const api = axios.create({
-  baseURL: "https://dummyjson.com/products",
+const instance = axios.create({
+  baseURL: "https://dummyjson.com",
   timeout: 5000,
-  headers: { "X-Custom-Header": "foobar" },
+  headers: {
+    "Content-Type": "application/json",
+    "X-Custom-Header": "foobar",
+  },
 });
 
-api.interceptors.request.use(
+instance.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    const token = getToken;
-    
-    if (token) {
-      config.headers.set("Authorization", `token ${token}`);
+    const token = localStorage.getItem("token");
+
+    if (token && config.headers) {
+      config.headers.set("Authorization", `Bearer ${token}`);
     }
-    
+
     return config;
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
-export default api;
+export default instance;

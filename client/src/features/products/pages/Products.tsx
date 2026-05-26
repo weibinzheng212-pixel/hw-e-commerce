@@ -9,13 +9,13 @@ import {
   Badge,
   Button,
   Flex,
+  Space,
 } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import { Spinner } from "../../../components/ui/Spinner";
-import type { ProductResponse } from "../type";
+import type { ProductResponse } from "../../../types/type";
 import { fetchCategories, fetchProducts } from "../api";
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const useCategory = () => {
   return useQuery({
@@ -43,11 +43,19 @@ const Products = () => {
   return (
     <Container size="xl" py="xl">
       <Title order={1} mb="xl"></Title>
-      <Text size="lg">Products page - add your products here test</Text>
+      <Text size="lg">Products page</Text>
       <Flex wrap="wrap" gap="md">
         {data?.products.map((products) => {
-          const { id, title, price, rating, stock, images, thumbnail, description } =
-            products;
+          const {
+            id,
+            title,
+            price,
+            rating,
+            stock,
+            images,
+            thumbnail,
+            description,
+          } = products;
           return (
             <Card key={id} shadow="sm" padding="xl" withBorder w={250}>
               <Card.Section>
@@ -62,6 +70,13 @@ const Products = () => {
               <Text size="sm" c="dimmed">
                 {description}
               </Text>
+
+              <div style={{ display: "flex" }}>
+                <Text size="sm"> Stock: {stock}</Text>
+                <Space w="md" />
+
+                <Text size="sm">Rating: {rating}</Text>
+              </div>
 
               <Button color="blue" fullWidth mt="md">
                 view details
