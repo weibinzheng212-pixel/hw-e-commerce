@@ -7,8 +7,11 @@ export const fetchProducts = async () => {
 };
 
 
+
+
 export const fetchCategories = async () => {
   const res = await fetch("https://dummyjson.com/products/categories");
   const data = await res.json();
   return data as Category[];
 };
+
